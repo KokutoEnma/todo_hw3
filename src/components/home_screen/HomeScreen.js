@@ -43,6 +43,10 @@ const mapStateToProps = (state) => {
     };
 };
 
+const handleNewList = () => {
+    router.push('/todoList')
+}
+
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
