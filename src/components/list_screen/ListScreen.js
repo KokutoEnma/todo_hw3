@@ -48,7 +48,11 @@ class ListScreen extends Component {
                     </div>
                 </div>
                     <div className="card z-depth-0 todo-list-link pink-lighten-3">
-                            <span className = "card-title">Task</span>
+                        <div className="row">
+                            <span className = "card-title col s4">Task</span>
+                            <span className = "card-title col s3">Due Date</span>
+                            <span className = "card-title col s2">Status</span>
+                        </div>
                     </div>
                 <ItemsList todoList={todoList} />
             </div>
