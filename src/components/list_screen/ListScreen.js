@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import ItemsList from './ItemsList.js'
 import { firestoreConnect } from 'react-redux-firebase';
 import { timingSafeEqual } from 'crypto';
+import { getFirestore } from 'redux-firestore';
 
 class ListScreen extends Component {
     state = {
@@ -15,12 +16,17 @@ class ListScreen extends Component {
     handleChange = (e) => {
         e.persist();
         const target = e.target;
-        console.log(target.value, this.state)
+        console.log(this.props.todoList)
         this.setState(state => ({
             ...state,
             [target.id]: target.value,
         }));
-        
+
+
+        const fireStore = getFirestore();
+        fireStore.collection('todoLists').doc(this.props.todoList.id).update({
+            [target.id]: target.value,
+        })
     }
 
     render() {
