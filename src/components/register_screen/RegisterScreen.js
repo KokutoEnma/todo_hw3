@@ -18,7 +18,7 @@ class RegisterScreen extends Component {
     this.setState(state => ({
       ...state,
       [target.id]: target.value,
-    }), ()=>console.log(this.state));
+    }));
   }
 
   handleSubmit = (e) => {
@@ -26,7 +26,6 @@ class RegisterScreen extends Component {
     const { props, state } = this;
     const { firebase } = props;
     const newUser = { ...state };
-    console.log(props)
     props.register(newUser, firebase);
   }
 

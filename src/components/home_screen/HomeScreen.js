@@ -3,9 +3,23 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { NavLink, Redirect } from 'react-router-dom';
 import { firestoreConnect } from 'react-redux-firebase';
+import { getFirestore } from 'redux-firestore';
 import TodoListLinks from './TodoListLinks'
 
 class HomeScreen extends Component {
+    handleNewList = () => {
+        const fireStore = getFirestore();
+        fireStore.collection('todoLists').add({
+            items : [],
+            name : "",
+            owner : ""
+        })
+        .then(ref => {
+            console.log(ref.id)
+            this.props.history.push('/todoList/'+ref.id);
+        })
+        
+    }
 
     render() {
         if (!this.props.auth.uid) {
@@ -43,9 +57,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-const handleNewList = () => {
-    router.push('/todoList')
-}
+
 
 export default compose(
     connect(mapStateToProps),
