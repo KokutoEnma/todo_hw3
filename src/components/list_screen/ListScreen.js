@@ -16,37 +16,40 @@ class ListScreen extends Component {
     handleChange = (e) => {
         e.persist();
         const target = e.target;
-        console.log(this.props.todoList)
         this.setState(state => ({
             ...state,
             [target.id]: target.value,
         }));
 
-
         const fireStore = getFirestore();
         fireStore.collection('todoLists').doc(this.props.todoList.id).update({
-            [target.id]: target.value,
+            [target.id] : target.value,
         })
     }
 
     render() {
         const auth = this.props.auth;
         const todoList = this.props.todoList;
-        if (!auth.uid) {
+        if (!auth.uid || todoList==null) {
             return <Redirect to="/" />;
         }
 
         return (
             <div className="container white">
                 <h5 className="grey-text text-darken-3">Todo List</h5>
-                <div className="input-field">
-                    <label class="active" htmlFor="email">Name</label>
-                    <input className="active" type="text" name="name" id="name" onChange={this.handleChange} value={todoList.name} />
+                <div className="row">
+                    <div className="input-field col s6">
+                        <label className="active" htmlFor="email">Name</label>
+                        <input className="active" type="text" name="name" id="name" onChange={this.handleChange} value={todoList.name} />
+                    </div>
+                    <div className="input-field col s6">
+                        <label className="active" htmlFor="password">Owner</label>
+                        <input className="active" type="text" name="owner" id="owner" onChange={this.handleChange} value={todoList.owner} />
+                    </div>
                 </div>
-                <div className="input-field">
-                    <label class="active" htmlFor="password">Owner</label>
-                    <input className="active" type="text" name="owner" id="owner" onChange={this.handleChange} value={todoList.owner} />
-                </div>
+                    <div className="card z-depth-0 todo-list-link pink-lighten-3">
+                            <span className = "card-title">Task</span>
+                    </div>
                 <ItemsList todoList={todoList} />
             </div>
         );
@@ -54,9 +57,12 @@ class ListScreen extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+    
   const { id } = ownProps.match.params;
   const { todoLists } = state.firestore.data;
   const todoList = todoLists ? todoLists[id] : null;
+  if(todoList==null)
+    window.location.href = "http://localhost:3000/"
   todoList.id = id;
 
   return {
