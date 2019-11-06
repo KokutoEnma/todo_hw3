@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import ItemsList from './ItemsList.js'
 import { firestoreConnect } from 'react-redux-firebase';
+import { timingSafeEqual } from 'crypto';
 
 class ListScreen extends Component {
     state = {
@@ -12,12 +13,14 @@ class ListScreen extends Component {
     }
 
     handleChange = (e) => {
-        const { target } = e;
-
+        e.persist();
+        const target = e.target;
+        console.log(target.value, this.state)
         this.setState(state => ({
             ...state,
             [target.id]: target.value,
         }));
+        
     }
 
     render() {
@@ -31,11 +34,11 @@ class ListScreen extends Component {
             <div className="container white">
                 <h5 className="grey-text text-darken-3">Todo List</h5>
                 <div className="input-field">
-                    <label htmlFor="email">Name</label>
+                    <label class="active" htmlFor="email">Name</label>
                     <input className="active" type="text" name="name" id="name" onChange={this.handleChange} value={todoList.name} />
                 </div>
                 <div className="input-field">
-                    <label htmlFor="password">Owner</label>
+                    <label class="active" htmlFor="password">Owner</label>
                     <input className="active" type="text" name="owner" id="owner" onChange={this.handleChange} value={todoList.owner} />
                 </div>
                 <ItemsList todoList={todoList} />
