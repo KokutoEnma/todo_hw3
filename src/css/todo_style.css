@@ -38,3 +38,20 @@ div.banner {
 .home_new_list_button:hover {
   box-shadow: 1px 2px;
 }
+
+.todo-list-link {
+  height : 80px;
+}
+
+.todo-list-link, .card-content, .todo-list-header{
+  padding : 10px;
+  margin-bottom: 0px;
+}
+
+.card, .card-content {
+  padding : 10px !important;
+}
+
+nav .brand-logo {
+  left : 7%;
+}

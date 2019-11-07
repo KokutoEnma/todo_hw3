@@ -47,11 +47,11 @@ class ListScreen extends Component {
                         <input className="active" type="text" name="owner" id="owner" onChange={this.handleChange} value={todoList.owner} />
                     </div>
                 </div>
-                    <div className="card z-depth-0 todo-list-link pink-lighten-3">
-                        <div className="row">
-                            <span className = "card-title col s4">Task</span>
-                            <span className = "card-title col s3">Due Date</span>
-                            <span className = "card-title col s2">Status</span>
+                    <div className="card z-depth-0 todo-list-header green">
+                        <div className="card-content grey-text text-darken-3 row">
+                                <span className = "card-title col s4">Task</span>
+                                <span className = "card-title col s3">Due Date</span>
+                                <span className = "card-title col s2">Status</span>
                         </div>
                     </div>
                 <ItemsList todoList={todoList} />
