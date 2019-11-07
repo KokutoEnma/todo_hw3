@@ -39,10 +39,6 @@ div.banner {
   box-shadow: 1px 2px;
 }
 
-.todo-list-link {
-  height : 80px;
-}
-
 .todo-list-link, .card-content, .todo-list-header{
   padding : 10px;
   margin-bottom: 0px;
