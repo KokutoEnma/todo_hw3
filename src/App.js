@@ -9,7 +9,8 @@ import RegisterScreen from './components/register_screen/RegisterScreen.js';
 import LoginScreen from './components/login_screen/LoginScreen.js';
 import HomeScreen from './components/home_screen/HomeScreen.js';
 import ListScreen from './components/list_screen/ListScreen.js';
-import DatabaseTester from './test/DatabaseTester'
+import DatabaseTester from './test/DatabaseTester';
+import { getFirestore } from 'redux-firestore';
 
 class App extends Component {
   render() {
@@ -17,7 +18,6 @@ class App extends Component {
 
     // if auth is loaded then we render App.
     // But if not then we doesn't render the one.
-    console.log(auth)
     if (auth.isLoaded) {
       return (
         <BrowserRouter>
@@ -40,9 +40,12 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  auth: state.firebase.auth,
-});
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+    todoLists: state.firestore.ordered.todoLists,
+  }
+};
 
 export default compose(
   firebaseConnect(),

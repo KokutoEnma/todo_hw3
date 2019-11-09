@@ -15,7 +15,6 @@ class HomeScreen extends Component {
             owner : ""
         })
         .then(ref => {
-            console.log(ref.id)
             this.props.history.push('/todoList/'+ref.id);
         })
         
@@ -25,7 +24,7 @@ class HomeScreen extends Component {
         if (!this.props.auth.uid) {
             return <Redirect to="/login" />;
         }
-
+        console.log(this.props)
         return (
             <div className="dashboard container">
                 <div className="row">
@@ -52,8 +51,10 @@ class HomeScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        todoLists: state.firestore.ordered.todoLists,
     };
 };
 

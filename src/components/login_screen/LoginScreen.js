@@ -72,10 +72,13 @@ class LoginScreen extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  authError: state.auth.authError,
-  auth: state.firebase.auth,
-});
+const mapStateToProps = state => {
+  console.log(state)
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth,
+  }
+};
 
 const mapDispatchToProps = dispatch => ({
   login: authData => dispatch(loginHandler(authData)),

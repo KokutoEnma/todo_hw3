@@ -1,0 +1,16 @@
+.card_due_date, .card_assigned_to, .card_completed, .card_pending{
+    top:50%;
+    font-size: 18px !important;
+}
+
+.card_completed {
+    color: green;
+}
+
+.card_pending {
+    color: red;
+}
+
+.todo_list_link:hover{
+    background-color: var(--swatch-complement);
+}
