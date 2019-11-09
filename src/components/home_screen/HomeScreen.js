@@ -29,7 +29,7 @@ class HomeScreen extends Component {
             <div className="dashboard container">
                 <div className="row">
                     <div className="col s12 m4">
-                        <TodoListLinks />
+                        <TodoListLinks/>
                     </div>
 
                     <div className="col s8">
@@ -51,7 +51,6 @@ class HomeScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         auth: state.firebase.auth,
         todoLists: state.firestore.ordered.todoLists,

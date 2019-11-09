@@ -16,6 +16,7 @@ class Navbar extends React.Component {
       <nav className="nav-wrapper grey darken-3">
         <div className="container">
           <Link to="/" className="brand-logo">@todo</Link>
+          <Link to="/databaseTester" className="tester">databseTester</Link>
           {links}
         </div>
       </nav>
