@@ -1,11 +1,12 @@
 import React from 'react';
+import { Button, Icon } from 'react-materialize';
 
 class ItemCard extends React.Component {
     setCompleted = (completed) =>{
         if(completed)
-            return <span className="card-title card_completed col s2">Completed</span>
+            return <span className="card-title card_completed col s4">Completed</span>
         else
-            return <span className="card-title card_pending col s2">Pending</span>
+            return <span className="card-title card_pending col s1">Pending</span>
     }
     render() {
         const { item } = this.props;  
@@ -16,22 +17,13 @@ class ItemCard extends React.Component {
                     <span className="card-title card_assigned_to col s4">{"Assigned to:"+item.assigned_to}</span>
                     <span className="card-title card_due_date col s3">{item.due_date}</span>
                     {this.setCompleted(item.completed)}
-                
-                <div className="fixed-action-btn right" onClick={()=>console.log("hi")}>
-                    <a ref="#" className="btn-floating red btn-large">
-                        <i className="large material-icons">mode_edit</i>
-                    </a>
-                    <ul>
-                        <li><a ref="#" className="btn-floating blue btn-large"><i 
-                        className="large material-icons">insert_chart</i></a></li>
-                        <li><a ref="#" className="btn-floating green btn-large"><i 
-                        className="large material-icons">format_quotes</i></a></li>
-                        <li><a ref="#" className="btn-floating yellow btn-large"><i 
-                        className="large material-icons">publish</i></a></li>
-                        <li><a ref="#" className="btn-floating orange btn-large"><i 
-                        className="large material-icons">attach_file</i></a></li>
-                    </ul>
-                </div>
+                    <div className="col s1 right">
+                        <Button floating fab={{direction: 'left'} } className="red" large>
+                            <Button floating icon={<Icon className="materialize-icons">arrow_upward</Icon>} className="red" />
+                            <Button floating icon={<Icon className="materialize-icons">arrow_downward</Icon>} className="yellow darken-1" />
+                            <Button floating icon={<Icon className="materialize-icons">clear</Icon>} className="green" />
+                        </Button>
+                    </div>
         
       
                     
