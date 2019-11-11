@@ -21,6 +21,7 @@ class ItemCard extends React.Component {
                     return;
                 }
                 let temp=items[i];
+                items[i]=items[i-1];
                 items[i-1]=temp;
                 this.dbref.doc(this.props.todoList.id).update({
                     items:items
