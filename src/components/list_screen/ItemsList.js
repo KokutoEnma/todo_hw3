@@ -8,6 +8,7 @@ class ItemsList extends React.Component {
     render() {
         const todoList = this.props.todoList;
         const items = todoList.items;
+        console.log(items)
         return (
             <div className="todo-lists section">
                 {items && items.map(function(item) {

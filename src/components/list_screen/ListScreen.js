@@ -26,35 +26,6 @@ class ListScreen extends Component {
     current_sort_criteria=-1;
     dbref= getFirestore().collection("todoLists");
 
-    moveCardUp(index) {
-
-        if(index<=0)
-            return
-
-        let temp = this.props.todoList.items[index];
-        this.props.todoList.items[index]=this.props.todoList.items[index-1];
-        this.props.todoList.items[index-1]=temp;
-
-    }
-
-    moveCardDown(index) {
-
-        
-
-        let num = this.props.todoList.items.length;
-        if(index>=num-1)
-            return
-
-        let temp = this.props.todoList.items[index];
-        this.props.todoList.items[index]=this.props.todoList.items[index+1];
-        this.props.todoList.items[index+1]=temp;
-        
-    }
-
-    deleteCard(index) {
-        let to_be_removed = this.props.todoList.items[index];
-    }
-
 
     sortByTask(){
         if(this.current_sort_criteria===this.sort_criteria.task_increasing){
