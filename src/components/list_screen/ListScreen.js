@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import ItemsList from './ItemsList.js'
@@ -7,6 +7,7 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { timingSafeEqual } from 'crypto';
 import { getFirestore } from 'redux-firestore';
 import Deleter from './deleter.js';
+
 
 class ListScreen extends Component {
     state = {
@@ -125,7 +126,7 @@ class ListScreen extends Component {
     }
 
     handleNewItem = () =>{
-        this.props.history.push('/itemEdit/'+this.props.todoList.id+"/new");
+        this.props.history.push('/todoList/'+this.props.todoList.id+"/new");
     }
 
     render() {
@@ -162,12 +163,13 @@ class ListScreen extends Component {
                             </div>
                         </div>
                     <ItemsList todoList={todoList}/>
-                    <div className="card z-depth-0 todo-list-link lighten-3" onClick={this.handleNewItem}>
-                        <div className="card-content grey-text text-darken-3 row">
-                            <span className="col s6"></span>
-                            <span className="large material-icons" >add</span>
+                    <Link to={'/todoList/'+this.props.todoList.id+"/new" } >
+                        <div className="card z-depth-0 todo-list-link lighten-3" >
+                            <div className="card-content grey-text text-darken-3 row valign-wrapper" style={{height:"90px"}}>
+                                <span className="large material-icons col s6">add</span>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                     <Deleter todoListId={this.props.todoList.id}/>
                     
                     

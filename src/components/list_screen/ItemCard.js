@@ -60,15 +60,13 @@ class ItemCard extends React.Component {
         }
     }
 
-    handleEditItem = () =>{
-        this.props.history.push('/itemEdit/'+this.props.todoList.id+"/"+this.props.key);
-    }
+    
 
 
     render() {
         const { item } = this.props;  
         return (
-            <div className="card z-depth-0 todo-list-link lighten-3" onClick={this.handleEditItem}>
+            <div className="card z-depth-0 todo-list-link lighten-3" >
                 <div className="card-content grey-text text-darken-3 row">
                     <span className="card-title card_description col s12">{item.description}</span>
                     <span className="card-title card_assigned_to col s4">{"Assigned to:"+item.assigned_to}</span>
@@ -85,7 +83,6 @@ class ItemCard extends React.Component {
       
                     
                 </div>
-                
             </div>
         );
     }

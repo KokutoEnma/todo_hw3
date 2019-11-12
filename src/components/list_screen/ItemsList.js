@@ -3,17 +3,28 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import ItemCard from './ItemCard';
 import { firestoreConnect } from 'react-redux-firebase';
+import { Link } from 'react-router-dom';
 
 class ItemsList extends React.Component {
+
+    handleEditItem = (key) =>{
+        this.props.history.push('/todoList/'+this.props.todoList.id+"/"+key);
+    }
+
     render() {
         const todoList = this.props.todoList;
+        if(todoList==null)
+            return <div>Loding</div>
         const items = todoList.items;
         return (
             <div className="todo-lists section">
-                {items && items.map(function(item) {
+                {items && items.map(item => {
                     item.id = item.key;
+
                     return (
+                        <Link to={'/todoList/'+todoList.id+"/"+item.key} todoList={todoList} item={item}>
                         <ItemCard todoList={todoList} item={item} key={item.key}/>
+                        </Link>
                     );})
                 }
             </div>

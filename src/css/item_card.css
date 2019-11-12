@@ -40,14 +40,9 @@ cursor: pointer;
 }
 
 
-
-
-
-
-
-
-
-
+.btn {
+  margin-left: 20px
+}
 
 .deleter { 
     position: fixed;
