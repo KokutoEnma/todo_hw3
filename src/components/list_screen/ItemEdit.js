@@ -5,15 +5,16 @@ import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { getFirestore } from 'redux-firestore';
 import { Checkbox } from 'react-materialize';
+import { stat } from 'fs';
 
 
 class ItemEdit extends React.Component {
 
     state = {
-        description: this.props.item?this.props.item.description:'',
-        assigned_to: this.props.item?this.props.item.assigned_to:'',
-        due_date: this.props.item?this.props.item.due_date:'',
-        completed: this.props.item?this.props.item.completed:false,
+        description: '',
+        assigned_to: '',
+        due_date: '',
+        completed: false,
         is_editing:false,
       }
     
@@ -41,12 +42,30 @@ class ItemEdit extends React.Component {
         const { firestore } = props;
         const todoList = this.props.todoList;
         todoList.items.map( item => {
-            if(item.key==key)
-                item=state;
+            if(item.key==key){
+                item.description = state.description;
+                item.assigned_to = state.assigned_to;
+                item.due_date = state.due_date;
+                item.completed = state.completed;
+            }
         })
+
+        if(key=='new'){
+            const uuidv1 = require('uuid/v1');
+            const key = uuidv1();
+            todoList.items.push({
+                description:state.description,
+                assigned_to:state.assigned_to,
+                due_date:state.due_date,
+                completed:state.completed,
+                key:key
+            })
+        }
         firestore.collection("todoLists").doc(props.match.params.id).update({
-            todoList
-        })
+            items:todoList.items
+        });
+
+        this.props.history.push('/todoList/'+this.props.match.params.id);
       }
 
     render() {
@@ -100,6 +119,7 @@ const mapStateToProps = (state, ownProps) => {
         })[0]
     }
     return {
+        todoList:todoList,
         item: item,
         auth: state.firebase.auth,
     };

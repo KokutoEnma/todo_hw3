@@ -13,7 +13,8 @@ class ItemCard extends React.Component {
             return <span className="card-title card_pending col s4">Pending</span>
     }
 
-    moveCardUp = (index) =>{
+    moveCardUp = (index, e) =>{
+        e.preventDefault();
         let items=this.props.todoList.items;
         for(let i=0;i<items.length;i++){
             if(items[i].id==index){
@@ -30,7 +31,8 @@ class ItemCard extends React.Component {
         }
     }
 
-    moveCardDown(index) {
+    moveCardDown(index, e) {
+        e.preventDefault();
         let items=this.props.todoList.items;
         for(let i=0;i<items.length;i++){
             if(items[i].id==index){
@@ -48,7 +50,8 @@ class ItemCard extends React.Component {
         }
     }
 
-    deleteCard(index) {
+    deleteCard(index, e) {
+        e.preventDefault();
         let items=this.props.todoList.items;
         for(let i=0;i<items.length;i++){
             if(items[i].id==index){
