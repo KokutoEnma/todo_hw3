@@ -7,10 +7,6 @@ import { Link } from 'react-router-dom';
 
 class ItemsList extends React.Component {
 
-    handleEditItem = (key) =>{
-        this.props.history.push('/todoList/'+this.props.todoList.id+"/"+key);
-    }
-
     render() {
         const todoList = this.props.todoList;
         if(todoList==null)
@@ -20,7 +16,7 @@ class ItemsList extends React.Component {
             <div className="todo-lists section">
                 {items && items.map(item => {
                     item.id = item.key;
-
+                    console.log(todoList, item)
                     return (
                         <Link to={'/todoList/'+todoList.id+"/"+item.key} todoList={todoList} item={item}>
                         <ItemCard todoList={todoList} item={item} key={item.key}/>
