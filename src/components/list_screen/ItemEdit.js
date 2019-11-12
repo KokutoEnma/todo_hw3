@@ -10,67 +10,79 @@ import { Checkbox } from 'react-materialize';
 class ItemEdit extends React.Component {
 
     state = {
-        description: '',
-        assigned_to: '',
-        due_date: null,
-        completed: false,
+        description: this.props.item?this.props.item.description:'',
+        assigned_to: this.props.item?this.props.item.assigned_to:'',
+        due_date: this.props.item?this.props.item.due_date:'',
+        completed: this.props.item?this.props.item.completed:false,
+        is_editing:false,
       }
     
       handleChange = (e) => {
-        const { target } = e;
-        this.setState(state => ({
-          ...state,
-          [target.id]: target.value,
-        }));
+                
+        const target = e.target;
+        if(target.id=='completed'){
+            this.setState(state => ({
+                ...state,
+                [target.id]: target.checked,
+            }));
+        }
+        else{
+            this.setState(state => ({
+                ...state,
+                [target.id]: target.value,
+            }));
+        }
       }
     
       handleSubmit = (e) => {
         e.preventDefault();
         const { props, state } = this;
-        const { firebase } = props;
-
+        const key=props.match.params.key;
+        const { firestore } = props;
+        const todoList = this.props.todoList;
+        todoList.items.map( item => {
+            if(item.key==key)
+                item=state;
+        })
+        firestore.collection("todoLists").doc(props.match.params.id).update({
+            todoList
+        })
       }
 
     render() {
-        const todoList = this.props.todoList;
-        const key=this.props.itemKey;
-        if(todoList==null)
-            return <div>Loading</div>
-
-        const items = todoList.items;
-        let item = items.filter(item => {
-            return item.key==key
-        })[0]
-        console.log(item)
-        item = (item==null?this.state:item);
+        
+        if(this.state.is_editing==false && this.props.item!=null){
+            this.state = this.props.item;
+            this.state.is_editing=true;
+        }
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className="white">
                 <h5 className="grey-text text-darken-3">Item Editor</h5>
                 <div className="input-field">
                     <label className="active" htmlFor="description">Description</label>
-                    <input className="active" type="text" name="text" id="text" onChange={this.handleChange} value={item.description}/>
+                    <input className="active" type="text" name="text" id="description" onChange={this.handleChange} value={this.state.description}/>
                 </div>
                 <div className="input-field">
                     <label className="active" htmlFor="name">Assigned To</label>
-                    <input className="active" type="text" name="text" id="text" onChange={this.handleChange} value={item.assigned_to}/>
+                    <input className="active" type="text" name="text" id="assigned_to" onChange={this.handleChange} value={this.state.assigned_to}/>
                 </div>
                 <div className="input-field active">
                     <label className="active" htmlFor="dueDate">Due Date</label>
-                    <input className="active" placeholder="" type="date" name="text" id="text" onChange={this.handleChange} value={item.due_date}/>
+                    <input className="active" placeholder="" type="date" name="text" id="due_date" onChange={this.handleChange} value={this.state.due_date}/>
                 </div>
                 <div className="input-field" style={{height:"54px"}}>
                     <label>Status</label>
                     <label style={{left:"100px"}}>
                         
-                        <input type="checkbox" value="Status" checked={item.completed?"checked":null}/>
+                        <input type="checkbox" id='completed' checked={this.state.completed?"checked":null} onChange={this.handleChange}/>
                         <span></span>
                     </label>
                 </div>
                 <div className="input-field">
                     <button type="submit" className="btn pink lighten-1 z-depth-0">Submit</button>
                     
-                    <Link to={"/todoList/"+this.props.todoList.id}><button className="btn pink lighten-1 z-depth-0">Cancel</button></Link>
+                    <Link to={"/todoList/"+this.props.match.params.id}><button className="btn pink lighten-1 z-depth-0">Cancel</button></Link>
                 </div>
                 </form>
             </div>
@@ -81,10 +93,15 @@ const mapStateToProps = (state, ownProps) => {
     const { id, key } = ownProps.match.params;
     const { todoLists } = state.firestore.data;
     const todoList = todoLists ? todoLists[id] : null;
+    let item=null;
+    if(todoList!=null){
+        item = todoList.items.filter(item => {
+            return item.key==key
+        })[0]
+    }
     return {
-        todoList: todoList,
+        item: item,
         auth: state.firebase.auth,
-        itemKey: key
     };
 };
 
