@@ -125,7 +125,7 @@ class ListScreen extends Component {
     }
 
     handleNewItem = () =>{
-
+        this.props.history.push('/itemEdit/'+this.props.todoList.id+"/new");
     }
 
     render() {
@@ -161,11 +161,11 @@ class ListScreen extends Component {
                                     <span className = "card-title col s2" onClick={this.sortByStatus.bind(this)}>Status</span>
                             </div>
                         </div>
-                    <ItemsList todoList={todoList} />
-                    <div className="card z-depth-0 todo-list-link lighten-3">
+                    <ItemsList todoList={todoList}/>
+                    <div className="card z-depth-0 todo-list-link lighten-3" onClick={this.handleNewItem}>
                         <div className="card-content grey-text text-darken-3 row">
                             <span className="col s6"></span>
-                            <span className="large material-icons" onClick={this.handleNewItem}>add</span>
+                            <span className="large material-icons" >add</span>
                         </div>
                     </div>
                     <Deleter todoListId={this.props.todoList.id}/>
