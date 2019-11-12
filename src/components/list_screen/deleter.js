@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { getFirestore } from 'redux-firestore';
+import { Button, Icon } from 'react-materialize';
 
 export class Deleter extends Component {
     hideDialog() {

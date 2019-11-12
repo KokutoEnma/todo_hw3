@@ -6,7 +6,6 @@ import ItemsList from './ItemsList.js'
 import { firestoreConnect } from 'react-redux-firebase';
 import { timingSafeEqual } from 'crypto';
 import { getFirestore } from 'redux-firestore';
-// import { PhoneAuthProvider_Instance } from '@firebase/auth-types';
 import Deleter from './deleter.js';
 
 class ListScreen extends Component {
@@ -25,35 +24,6 @@ class ListScreen extends Component {
     }
     current_sort_criteria=-1;
     dbref= getFirestore().collection("todoLists");
-
-    moveCardUp(index) {
-
-        if(index<=0)
-            return
-
-        let temp = this.props.todoList.items[index];
-        this.props.todoList.items[index]=this.props.todoList.items[index-1];
-        this.props.todoList.items[index-1]=temp;
-
-    }
-
-    moveCardDown(index) {
-
-        
-
-        let num = this.props.todoList.items.length;
-        if(index>=num-1)
-            return
-
-        let temp = this.props.todoList.items[index];
-        this.props.todoList.items[index]=this.props.todoList.items[index+1];
-        this.props.todoList.items[index+1]=temp;
-        
-    }
-
-    deleteCard(index) {
-        let to_be_removed = this.props.todoList.items[index];
-    }
 
 
     sortByTask(){
@@ -154,6 +124,10 @@ class ListScreen extends Component {
         })
     }
 
+    handleNewItem = () =>{
+
+    }
+
     render() {
         const auth = this.props.auth;
         const todoList = this.props.todoList;
@@ -188,10 +162,10 @@ class ListScreen extends Component {
                             </div>
                         </div>
                     <ItemsList todoList={todoList} />
-                    <div className="card z-depth-0 todo-list-link white lighten-3">
+                    <div className="card z-depth-0 todo-list-link lighten-3">
                         <div className="card-content grey-text text-darken-3 row">
                             <span className="col s6"></span>
-                            <span className="large material-icons">add</span>
+                            <span className="large material-icons" onClick={this.handleNewItem}>add</span>
                         </div>
                     </div>
                     <Deleter todoListId={this.props.todoList.id}/>

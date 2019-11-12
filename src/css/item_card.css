@@ -31,13 +31,13 @@ font-size: 40pt;
 color: var(--swatch-accent);
 cursor: pointer;
 }
-
-.fixed-action-btn {
-    position: relative;
+.card:hover {
+  background-color: #f6e58d;
 }
-
-
-
+.fixed-action-btn {
+    position: absolute;
+    right: 5%;
+}
 
 
 

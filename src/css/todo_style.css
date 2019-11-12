@@ -43,6 +43,9 @@ div.banner {
   padding : 5px !important;
   margin-bottom: 0px;
 }
+.card-title {
+  cursor:pointer;
+}
 
 .card, .card-content {
   padding : 10px;
@@ -55,4 +58,8 @@ nav .brand-logo {
 nav .tester {
   position: relative;
   left : 50%
+}
+
+.container {
+  max-width: none;
 }
