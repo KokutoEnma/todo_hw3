@@ -43,6 +43,7 @@ class ItemCard extends React.Component {
                 this.dbref.doc(this.props.todoList.id).update({
                     items:items
                 })
+                return;
             }
         }
     }
@@ -60,7 +61,6 @@ class ItemCard extends React.Component {
     }
     render() {
         const { item } = this.props;  
-        console.log(item)
         return (
             <div className="card z-depth-0 todo-list-link lighten-3">
                 <div className="card-content grey-text text-darken-3 row">
