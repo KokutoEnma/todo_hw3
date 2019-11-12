@@ -17,7 +17,7 @@ class ItemCard extends React.Component {
                     <span className="card-title card_due_date col s3">{item.due_date}</span>
                     {this.setCompleted(item.completed)}
                 
-                <div className="fixed-action-btn right" onClick={()=>console.log("hi")}>
+                <div className="fixed-action-btn right" onClick={()=>}>
                     <a ref="#" className="btn-floating red btn-large">
                         <i className="large material-icons">mode_edit</i>
                     </a>
