@@ -12,7 +12,8 @@ class HomeScreen extends Component {
         fireStore.collection('todoLists').add({
             items : [],
             name : "",
-            owner : ""
+            owner : "",
+            timestamp: fireStore.FieldValue.serverTimestamp()
         })
         .then(ref => {
             this.props.history.push('/todoList/'+ref.id);
@@ -33,7 +34,7 @@ class HomeScreen extends Component {
                     </div>
 
                     <div className="col s8">
-                        <div className="banner">
+                        <div className="banner" onClick={this.testorder}>
                             @todo<br />
                             List Maker
                         </div>
@@ -62,6 +63,6 @@ const mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-      { collection: 'todoLists' },
+      { collection: 'todoLists', orderBy: ['timestamp', 'desc'] },
     ]),
 )(HomeScreen);
