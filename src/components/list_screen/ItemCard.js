@@ -13,8 +13,26 @@ class ItemCard extends React.Component {
             return <span className="card-title card_pending col s4">Pending</span>
     }
 
+    foolProof = () =>{
+        this.dbref.doc(this.props.todoList.id).get().then(doc=>{
+            const items = doc.data().items;
+            const first = items[0].key;
+            const last = items[items.length-1].key;
+
+            Array.from(items).forEach((item)=>{
+                document.getElementById('up_'+item.key).classList.remove('disabled');
+                document.getElementById('down_'+item.key).classList.remove('disabled');
+            })
+
+
+            document.getElementById('up_'+first).classList.add('disabled')
+            document.getElementById('down_'+last).classList.add('disabled')
+        })
+    }
+
     moveCardUp = (index, e) =>{
         e.preventDefault();
+        e.stopPropagation();
         let items=this.props.todoList.items;
         for(let i=0;i<items.length;i++){
             if(items[i].id==index){
@@ -26,7 +44,7 @@ class ItemCard extends React.Component {
                 items[i-1]=temp;
                 this.dbref.doc(this.props.todoList.id).update({
                     items:items
-                })
+                }).then(this.foolProof)
             }
         }
     }
@@ -44,7 +62,7 @@ class ItemCard extends React.Component {
                 items[i+1]=temp;
                 this.dbref.doc(this.props.todoList.id).update({
                     items:items
-                })
+                }).then(this.foolProof)
                 return;
             }
         }
@@ -58,7 +76,7 @@ class ItemCard extends React.Component {
                 items.splice(i,1)
                 this.dbref.doc(this.props.todoList.id).update({
                     items:items
-                })
+                }).then(this.foolProof)
             }
         }
     }
@@ -77,15 +95,16 @@ class ItemCard extends React.Component {
                     {this.setCompleted(item.completed)}
                     <div className="fab_button">
                         <Button floating fab={{direction: 'left'}} className="red"  large>
-                            <Button floating icon={<Icon className="materialize-icons">arrow_upward</Icon>} className="red" onClick={this.moveCardUp.bind(this, this.props.item.id)}/>
-                            <Button floating icon={<Icon className="materialize-icons">arrow_downward</Icon>} className="yellow darken-1" onClick={this.moveCardDown.bind(this, this.props.item.id)}/>
-                            <Button floating icon={<Icon className="materialize-icons">clear</Icon>} className="green" onClick={this.deleteCard.bind(this, this.props.item.id)}/>
+                            <Button floating id={"up_"+item.key} icon={<Icon className="materialize-icons" >arrow_upward</Icon>} className="red" onClick={this.moveCardUp.bind(this, this.props.item.id)}/>
+                            <Button floating id={"down_"+item.key} icon={<Icon className="materialize-icons" >arrow_downward</Icon>} className="yellow darken-1" onClick={this.moveCardDown.bind(this, this.props.item.id)}/>
+                            <Button floating id={"delete_"+item.key} icon={<Icon className="materialize-icons" >clear</Icon>} className="green" onClick={this.deleteCard.bind(this, this.props.item.id)}/>
                         </Button>
                     </div>
         
       
                     
                 </div>
+                {this.foolProof()}
             </div>
         );
     }
