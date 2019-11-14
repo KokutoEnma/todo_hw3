@@ -16,7 +16,8 @@
 }
 
 .trash {
-    font-size: 30px;
+    margin-right: 40px;
+    font-size: 40px;
 }
 
 .list_page_title {
@@ -34,10 +35,11 @@
 
 .trash:hover {
 color: var(--swatch-accent);
+background-color: #f6e58d;
 cursor: pointer;
 }
 .card:hover {
-  background-color: #f6e58d;
+  background-color: #f6e58d !important;
 }
 .fixed-action-btn {
     position: absolute;
@@ -49,155 +51,3 @@ cursor: pointer;
   margin-left: 20px
 }
 
-.deleter { 
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    background: var(--black);
-    cursor: pointer;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.35s ease-in;
-  }
-  
-  .deleter.is_visible {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  .deleter_dialog {
-    position: relative;
-    max-width: 800px;
-    max-height: 80vh;
-    border-radius: 5px;
-    background: var(--swatch-complement);
-    overflow: auto;
-    cursor: default;
-  }
-  
-  /*CUSTOM VARIABLES HERE*/
-  
-  .deleter_dialog > * {
-    padding: 1rem;
-  }
-   
-  .deleter_header,
-  .deleter_footer {
-    background: var(--lightgray);
-  }
-   
-  .deleter_header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-   
-  .deleter_header .deleter_close {
-    font-size: 1.5rem;
-  }
-   
-  .deleter p + p {
-    margin-top: 1rem;
-  }
-  
-  /* ANIMATIONS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  [data-animation] .deleter_dialog {
-    opacity: 0;
-    transition: all 0.5s var(--bounceEasing);
-  }
-  
-  [data-animation].is_visible .deleter_dialog {
-    opacity: 1;
-    transition-delay: 0.2s;
-  }
-  
-  [data-animation="slideInOutDown"] .deleter_dialog {
-    transform: translateY(100%);
-  }
-  
-  [data-animation="slideInOutTop"] .deleter_dialog {
-    transform: translateY(-100%);
-  }
-  
-  [data-animation="slideInOutLeft"] .deleter_dialog {
-    transform: translateX(-100%);
-  }
-  
-  [data-animation="slideInOutRight"] .deleter_dialog {
-    transform: translateX(100%);
-  }
-  
-  [data-animation="zoomInOut"] .deleter_dialog {
-    transform: scale(0.2);
-  }
-  
-  [data-animation="rotateInOutDown"] .deleter_dialog {
-    transform-origin: top left;
-    transform: rotate(-1turn);
-  }
-  
-  [data-animation="mixInAnimations"].is_visible .deleter_dialog {
-    animation: mixInAnimations 2s 0.2s linear forwards;
-  }
-  
-  [data-animation="slideInOutDown"].is_visible .deleter_dialog,
-  [data-animation="slideInOutTop"].is_visible .deleter_dialog,
-  [data-animation="slideInOutLeft"].is_visible .deleter_dialog,
-  [data-animation="slideInOutRight"].is_visible .deleter_dialog,
-  [data-animation="zoomInOut"].is_visible .deleter_dialog,
-  [data-animation="rotateInOutDown"].is_visible .deleter_dialog {
-    transform: none;
-  }
-  
-  @keyframes mixInAnimations {
-    0% {
-      transform: translateX(-100%);
-    }
-  
-    10% {
-      transform: translateX(0);
-    }
-  
-    20% {
-      transform: rotate(20deg);
-    }
-  
-    30% {
-      transform: rotate(-20deg);
-    }
-  
-    40% {
-      transform: rotate(15deg);
-    }
-  
-    50% {
-      transform: rotate(-15deg);
-    }
-  
-    60% {
-      transform: rotate(10deg);
-    }
-  
-    70% {
-      transform: rotate(-10deg);
-    }
-  
-    80% {
-      transform: rotate(5deg);
-    }
-  
-    90% {
-      transform: rotate(-5deg);
-    }
-  
-    100% {
-      transform: rotate(0deg);
-    }
-  }
