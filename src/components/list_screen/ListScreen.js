@@ -179,9 +179,9 @@ class ListScreen extends Component {
                     </div>
                         <div className="card z-depth-0 todo-list-header green">
                             <div className="card-content grey-text text-darken-3 row">
-                                    <span className = "card-title col s4" onClick={this.sortByTask.bind(this)}>Task</span>
-                                    <span className = "card-title col s3" onClick={this.sortByDueDate.bind(this)}>Due Date</span>
-                                    <span className = "card-title col s2" onClick={this.sortByStatus.bind(this)}>Status</span>
+                                    <span className = "card-title header col s4" onClick={this.sortByTask.bind(this)}>Task</span>
+                                    <span className = "card-title header col s3" onClick={this.sortByDueDate.bind(this)}>Due Date</span>
+                                    <span className = "card-title header col s2" onClick={this.sortByStatus.bind(this)}>Status</span>
                             </div>
                         </div>
                     <ItemsList todoList={todoList}/>

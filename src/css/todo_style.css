@@ -46,6 +46,9 @@ div.banner {
 .card-title {
   cursor:pointer;
 }
+.header:hover {
+  background-color: hotpink;
+}
 
 .card, .card-content {
   padding : 10px;

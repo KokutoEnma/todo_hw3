@@ -16,6 +16,8 @@ class ItemCard extends React.Component {
     foolProof = () =>{
         this.dbref.doc(this.props.todoList.id).get().then(doc=>{
             const items = doc.data().items;
+            if(items.length===0 || typeof items[0].key==='undefined' || typeof items[items.length-1].key==='undefined')
+                return;
             const first = items[0].key;
             const last = items[items.length-1].key;
 
@@ -34,8 +36,8 @@ class ItemCard extends React.Component {
         e.stopPropagation();
         let items=this.props.todoList.items;
         for(let i=0;i<items.length;i++){
-            if(items[i].id==index){
-                if(i==0){
+            if(items[i].id===index){
+                if(i===0){
                     return;
                 }
                 let temp=items[i];
@@ -52,8 +54,8 @@ class ItemCard extends React.Component {
         e.preventDefault();
         let items=this.props.todoList.items;
         for(let i=0;i<items.length;i++){
-            if(items[i].id==index){
-                if(i==items.length-1){
+            if(items[i].id===index){
+                if(i===items.length-1){
                     return;
                 }
                 let temp=items[i];
@@ -71,7 +73,7 @@ class ItemCard extends React.Component {
         e.preventDefault();
         let items=this.props.todoList.items;
         for(let i=0;i<items.length;i++){
-            if(items[i].id==index){
+            if(items[i].id===index){
                 items.splice(i,1)
                 this.dbref.doc(this.props.todoList.id).update({
                     items:items
