@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import './css/fonts/Lexend Exa/css.css';
 import './css/todo_layout.css'
 import './css/todo_style.css'
 import './css/item_card.css'

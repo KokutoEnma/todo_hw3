@@ -144,12 +144,12 @@ class ListScreen extends Component {
         }
         if(todoList){
             return (
-                <div className="container white">
+                <div className="container deep-purple lighten-5">
                     <div className="row">
                         <span className="list_page_title grey-text text-darken-3">Todo List</span>
-                        <Button href="#modal1" className="modal-trigger trash right">
+                        <div href="#modal1" className="modal-trigger trash right">
                         &#128465;
-                        </Button>
+                        </div>
                         <Modal id="modal1" header="Modal Header" open={this.state.modalActive} 
                         options={{dismissible:false,preventScrolling:false}}>
                             <header className="dialog_header">
@@ -158,8 +158,8 @@ class ListScreen extends Component {
                             <section className="dialog_content">
                                 <p><strong>Are you sure you want to delete this list?</strong></p>
                             </section>
-                                <button id="dialog_yes_button" onClick={this.deleteList}>Yes</button>
-                                <button id="dialog_no_button" onClick={this.handleModalClose}>No</button>
+                                <button id="dialog_yes_button" className='btn' onClick={this.deleteList}>Yes</button>
+                                <button id="dialog_no_button" className='btn' onClick={this.handleModalClose}>No</button>
                             <footer className="dialog_footer">
                                 The list will not be retreivable.
                             </footer>
@@ -177,7 +177,7 @@ class ListScreen extends Component {
                             <input className="active" type="text" name="owner" id="owner" onChange={this.handleChange} value={todoList.owner} />
                         </div>
                     </div>
-                        <div className="card z-depth-0 todo-list-header green">
+                        <div className="card z-depth-0 todo-list-header light-green darken-2">
                             <div className="card-content grey-text text-darken-3 row">
                                     <span className = "card-title header col s4" onClick={this.sortByTask.bind(this)}>Task</span>
                                     <span className = "card-title header col s3" onClick={this.sortByDueDate.bind(this)}>Due Date</span>
@@ -186,7 +186,7 @@ class ListScreen extends Component {
                         </div>
                     <ItemsList todoList={todoList}/>
                     <Link to={'/todoList/'+this.props.todoList.id+"/new" } >
-                        <div className="card z-depth-0 todo-list-link lighten-3" >
+                        <div className="card z-depth-0 todo-list-link lime accent-3" >
                             <div className="card-content grey-text text-darken-3 row valign-wrapper" style={{height:"90px"}}>
                                 <span className="large material-icons col s6">add</span>
                             </div>

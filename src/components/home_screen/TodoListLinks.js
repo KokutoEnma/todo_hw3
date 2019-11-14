@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import TodoListCard from './TodoListCard';
 import { getFirestore } from 'redux-firestore';
+import { firestoreConnect } from 'react-redux-firebase';
+
 
 class TodoListLinks extends React.Component {
 
@@ -18,7 +20,7 @@ class TodoListLinks extends React.Component {
         const todoLists = this.props.todoLists;
         console.log(todoLists)
         return (
-            <div className="todo-lists section" style={{marginTop:'50px'}}>
+            <div className="todo-lists" style={{marginTop:'50px'}}>
                 {todoLists && todoLists.map(todoList => (
                     <Link to={'/todoList/' + todoList.id} key={todoList.id} onClick={this.updateTimeStamp.bind(this,todoList.id)}>
                         <TodoListCard todoList={todoList} />
@@ -35,5 +37,9 @@ const mapStateToProps = (state) => {
         auth: state.firebase.auth,
     };
 };
-
-export default compose(connect(mapStateToProps))(TodoListLinks);
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+      { collection: 'todoLists', orderBy: ['timestamp', 'desc'] },
+    ]),
+)(TodoListLinks);

@@ -25,7 +25,7 @@ class HomeScreen extends Component {
         if (!this.props.auth.uid) {
             return <Redirect to="/login" />;
         }
-        console.log(this.props)
+        
         return (
             <div className="dashboard container">
                 <div className="row">
@@ -34,7 +34,7 @@ class HomeScreen extends Component {
                     </div>
 
                     <div className="col s8">
-                        <div className="banner" onClick={this.testorder}>
+                        <div className="banner">
                             @todo<br />
                             List Maker
                         </div>
@@ -54,7 +54,7 @@ class HomeScreen extends Component {
 const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
-        todoLists: state.firestore.ordered.todoLists,
+        todoLists: state.firestore.data,
     };
 };
 

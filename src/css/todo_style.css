@@ -55,7 +55,7 @@ div.banner {
 }
 
 nav .brand-logo {
-  left : 7%;
+  margin-left: 7px;
 }
 
 nav .tester {
