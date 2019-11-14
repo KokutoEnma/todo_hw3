@@ -20,13 +20,12 @@ class ItemCard extends React.Component {
             const last = items[items.length-1].key;
 
             Array.from(items).forEach((item)=>{
-                document.getElementById('up_'+item.key).classList.remove('disabled');
-                document.getElementById('down_'+item.key).classList.remove('disabled');
+                document.getElementById('up_'+item.key).classList.remove('disable');
+                document.getElementById('down_'+item.key).classList.remove('disable');
             })
 
-
-            document.getElementById('up_'+first).classList.add('disabled')
-            document.getElementById('down_'+last).classList.add('disabled')
+            document.getElementById('up_'+first).classList.add('disable')
+            document.getElementById('down_'+last).classList.add('disable')
         })
     }
 

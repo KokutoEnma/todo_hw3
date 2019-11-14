@@ -28,6 +28,10 @@
   display:none
 }
 
+.disable {
+  background-color: grey !important;
+}
+
 .trash:hover {
 color: var(--swatch-accent);
 cursor: pointer;
