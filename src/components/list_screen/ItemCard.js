@@ -95,7 +95,7 @@ class ItemCard extends React.Component {
                     <div className="fab_button">
                         <Button floating fab={{direction: 'left'}} className="red"  large>
                             <Button floating id={"up_"+item.key} icon={<Icon className="materialize-icons" >arrow_upward</Icon>} className="red" onClick={this.moveCardUp.bind(this, this.props.item.id)}/>
-                            <Button floating id={"down_"+item.key} icon={<Icon className="materialize-icons" >arrow_downward</Icon>} className="yellow darken-1" onClick={this.moveCardDown.bind(this, this.props.item.id)}/>
+                            <Button floating id={"down_"+item.key} icon={<Icon className="materialize-icons" >arrow_downward</Icon>} className="blue" onClick={this.moveCardDown.bind(this, this.props.item.id)}/>
                             <Button floating id={"delete_"+item.key} icon={<Icon className="materialize-icons" >clear</Icon>} className="green" onClick={this.deleteCard.bind(this, this.props.item.id)}/>
                         </Button>
                     </div>
