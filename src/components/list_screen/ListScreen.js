@@ -186,7 +186,7 @@ class ListScreen extends Component {
                         </div>
                     <ItemsList todoList={todoList}/>
                     <Link to={'/todoList/'+this.props.todoList.id+"/new" } >
-                        <div className="card z-depth-0 todo-list-link lime accent-3" >
+                        <div className="card item z-depth-0 todo-list-link" >
                             <div className="card-content grey-text text-darken-3 row valign-wrapper" style={{height:"90px"}}>
                                 <span className="large material-icons col s6">add</span>
                             </div>

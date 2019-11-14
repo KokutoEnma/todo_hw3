@@ -38,7 +38,7 @@ color: var(--swatch-accent);
 background-color: #f6e58d;
 cursor: pointer;
 }
-.card:hover {
+.item:hover, .list:hover {
   background-color: #f6e58d !important;
 }
 .fixed-action-btn {
