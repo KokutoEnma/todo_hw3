@@ -61,10 +61,11 @@ class LoginScreen extends Component {
               {authError ? <div className="red-text center"><p>{authError}</p></div> : null}
             </div>
           </form>
-
-          <div className="col s8 banner">
-            @todo<br />
-            List Maker
+          <div className="col s8">
+            <div className="banner">
+              @todo<br />
+              List Maker
+            </div>
           </div>
         </div>
       </div>
