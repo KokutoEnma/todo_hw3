@@ -7,12 +7,14 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { timingSafeEqual } from 'crypto';
 import { getFirestore } from 'redux-firestore';
 import Deleter from './deleter.js';
+import { Button, Modal} from 'react-materialize'
 
 
 class ListScreen extends Component {
     state = {
         name: '',
         owner: '',
+        modalActive : false,
     }
 
     sort_criteria={
@@ -26,6 +28,10 @@ class ListScreen extends Component {
     current_sort_criteria=-1;
     dbref= getFirestore().collection("todoLists");
 
+
+    handleModalClose = () =>{
+        this.setState({modalActive:false});
+    }
 
     sortByTask(){
         if(this.current_sort_criteria===this.sort_criteria.task_increasing){
@@ -106,11 +112,6 @@ class ListScreen extends Component {
             }
     }
 
-    processDeleteList = () =>{
-        let dialog = document.getElementById("deleter_yes_no_dialog");
-        dialog.classList.add("is_visible");
-    }
-
     handleChange = (e) => {
         e.persist();
         const target = e.target;
@@ -119,14 +120,19 @@ class ListScreen extends Component {
             [target.id]: target.value,
         }));
 
-        const fireStore = getFirestore();
-        fireStore.collection('todoLists').doc(this.props.todoList.id).update({
+        this.dbref.doc(this.props.todoList.id).update({
             [target.id] : target.value,
         })
     }
 
     handleNewItem = () =>{
         this.props.history.push('/todoList/'+this.props.todoList.id+"/new");
+    }
+
+    deleteList= () => {
+        this.dbref.doc(this.props.todoList.id).delete().then(()=>{
+            window.location.href="http://localhost:3000/"
+        })
     }
 
     render() {
@@ -141,8 +147,24 @@ class ListScreen extends Component {
                 <div className="container white">
                     <div className="row">
                         <span className="list_page_title grey-text text-darken-3">Todo List</span>
-                        <div className="trash right"
-                        onClick={this.processDeleteList}>&#128465;</div>
+                        <Button href="#modal1" className="modal-trigger trash right">
+                        &#128465;
+                        </Button>
+                        <Modal id="modal1" header="Modal Header" open={this.state.modalActive} 
+                        options={{dismissible:false,preventScrolling:false}}>
+                            <header className="dialog_header">
+                                Delete list?
+                            </header>
+                            <section className="dialog_content">
+                                <p><strong>Are you sure you want to delete this list?</strong></p>
+                            </section>
+                                <button id="dialog_yes_button" onClick={this.deleteList}>Yes</button>
+                                <button id="dialog_no_button" onClick={this.handleModalClose}>No</button>
+                            <footer className="dialog_footer">
+                                The list will not be retreivable.
+                            </footer>
+                        </Modal>
+
                     </div>
                     
                     <div className="row">

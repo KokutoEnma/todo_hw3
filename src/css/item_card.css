@@ -16,7 +16,7 @@
 }
 
 .trash {
-    font-size: 50px;
+    font-size: 30px;
 }
 
 .list_page_title {
@@ -24,9 +24,10 @@
     padding:20px
 }
 
-.trash {
-font-size: 40pt;
+.modal-footer {
+  display:none
 }
+
 .trash:hover {
 color: var(--swatch-accent);
 cursor: pointer;
