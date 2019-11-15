@@ -4,10 +4,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import ItemsList from './ItemsList.js'
 import { firestoreConnect } from 'react-redux-firebase';
-import { timingSafeEqual } from 'crypto';
 import { getFirestore } from 'redux-firestore';
-import Deleter from './deleter.js';
-import { Button, Modal} from 'react-materialize'
+import { Modal} from 'react-materialize'
 
 
 class ListScreen extends Component {
@@ -135,6 +133,18 @@ class ListScreen extends Component {
         })
     }
 
+    testOwner =() =>{
+        const todoList = this.props.todoList;
+        if(todoList.owner!="")
+            return "active";
+    }
+
+    testName =() =>{
+        const todoList = this.props.todoList;
+        if(todoList.name!="")
+            return "active";
+    }
+
     render() {
         const auth = this.props.auth;
         const todoList = this.props.todoList;
@@ -169,12 +179,12 @@ class ListScreen extends Component {
                     
                     <div className="row">
                         <div className="input-field col s5">
-                            <label className="active" htmlFor="email">Name</label>
+                            <label className={this.testName()}>Name</label>
                             <input className="active" type="text" name="name" id="name" onChange={this.handleChange} value={todoList.name} />
                         </div>
                         <div className="input-field col s5 right">
-                            <label className="active" htmlFor="password">Owner</label>
-                            <input className="active" type="text" name="owner" id="owner" onChange={this.handleChange} value={todoList.owner} />
+                            <label className={this.testOwner()}>Owner</label>
+                            <input className="active" type="text" name="owner" id="owner" onChange={this.handleChange} value={todoList.owner}/>
                         </div>
                     </div>
                         <div className="card z-depth-0 todo-list-header light-green darken-2">
@@ -192,7 +202,6 @@ class ListScreen extends Component {
                             </div>
                         </div>
                     </Link>
-                    <Deleter todoListId={this.props.todoList.id}/>
                     
                     
       

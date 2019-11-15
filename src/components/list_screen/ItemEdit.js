@@ -68,6 +68,21 @@ class ItemEdit extends React.Component {
         this.props.history.push('/todoList/'+this.props.match.params.id);
       }
 
+    testDescription =() =>{
+        const item = this.props.item;
+        if(item==null)
+            return '';
+        if(item.description!="")
+            return "active";
+    }
+    testAssignedTo =() =>{
+        const item = this.props.item;
+        if(item==null)
+            return '';
+        if(item.assigned_to!="")
+            return "active";
+    }
+
     render() {
         
         if(this.state.is_editing==false && this.props.item!=null){
@@ -79,11 +94,11 @@ class ItemEdit extends React.Component {
                 <form onSubmit={this.handleSubmit} className="white">
                 <h5 className="grey-text text-darken-3">Item Editor</h5>
                 <div className="input-field">
-                    <label className="active" htmlFor="description">Description</label>
+                    <label className={this.testDescription()} htmlFor="description">Description</label>
                     <input className="active" type="text" name="text" id="description" onChange={this.handleChange} value={this.state.description}/>
                 </div>
                 <div className="input-field">
-                    <label className="active" htmlFor="name">Assigned To</label>
+                    <label className={this.testAssignedTo()} htmlFor="name">Assigned To</label>
                     <input className="active" type="text" name="text" id="assigned_to" onChange={this.handleChange} value={this.state.assigned_to}/>
                 </div>
                 <div className="input-field active">
