@@ -129,7 +129,7 @@ class ListScreen extends Component {
 
     deleteList= () => {
         this.dbref.doc(this.props.todoList.id).delete().then(()=>{
-            window.location.href="http://localhost:3000/"
+            this.props.history.push('/');
         })
     }
 
